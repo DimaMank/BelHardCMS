@@ -1,0 +1,11 @@
+<div class="card mb-4">
+    <div class="card-header">
+        <b>{{ vacancy.organization }}</b>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ vacancy.state }}</h5>
+        <p class="card-text"><b>{{ vacancy.salary }}</b></p>
+        <p class="card-text">{{ vacancy.description | truncatewords:20 }}</p>
+        <a  href="{{ vacancy.get_absolute_url }}" class="btn btn-secondary">Подробнее</a>
+    </div>
+</div>

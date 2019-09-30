@@ -1,0 +1,107 @@
+{% extends 'client/client_main_page.html' %}
+
+{% block title %}
+    {{vacancy.state}}
+{% endblock %}
+
+{% block content %}
+    <h1 class="mt-5">
+        {{ vacancy.state }}
+    </h1>
+    <p>
+        <b>{{ vacancy.salary }}</b>
+    </p>
+    <p>
+        <b>{{ vacancy.organization }}</b>
+    </p>
+    <p>
+        {{ vacancy.address }}
+    </p>
+    <p>
+        {{ vacancy.employment }}
+    </p>
+    <p>
+        {{ vacancy.description }}
+    </p>
+    <p>
+        {{ vacancy.skills }}
+    </p>
+    <p>
+        {{ vacancy.requirements }}
+    </p>
+    <p>
+        {{ vacancy.duties }}
+    </p>
+    <p>
+        {{ vacancy.conditions }}
+    </p>
+
+
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    {% if vacancy.in_waiting_for_resume.all %}
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+            <a href="{{ vacancy.in_waiting_for_resume.get.get_absolute_url }}" class="btn btn-secondary">Назад</a>
+        </div>
+    {% elif vacancy.accept_for_resume.all %}
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+            <a href="{{ vacancy.accept_for_resume.get.get_accept_url }}" class="btn btn-secondary">Назад</a>
+        </div>
+    {% elif vacancy.reject_for_resume.all %}
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+            <a href="{{ vacancy.reject_for_resume.get.get_reject_url }}" class="btn btn-secondary">Назад</a>
+        </div>
+    {% else %}
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+            <a onclick="javascript:history.back(); return false;" class="btn btn-secondary">Назад</a>
+        </div>
+    {% endif %}
+
+    <div class="btn-group mr-2" role="group" aria-label="Second group" hidden id="first">
+        <button type="button" id="{{ vacancy.slug }}" class="btn btn-success accept">Принять</button>
+     </div>
+
+
+     <div class="btn-group" role="group" aria-label="Third group" hidden id="second">
+         <button type="button" id="{{ vacancy.slug }}" class="btn btn-danger reject">Отклонить</button>
+     </div>
+
+</div>
+
+
+<script>
+$('document').ready(function () {
+    var first = {{ first_flag }}
+    var second = {{ second_flag }}
+    if (first){$('#first').attr('hidden',false)}
+    if (second){$('#second').attr('hidden',false)}
+
+
+    /*actions for buttons*/
+    $('.accept').on('click',function () {
+        var slug = $(this).attr('id');
+        $.ajax({'url':'/client/accept_reject/',
+                'data':{'flag':'accept',"slug":slug},
+                success:function (data) {
+                    console.log(data);
+                    $('#first').attr('hidden', true)
+                    $('#second').attr('hidden', false)
+                }})
+
+    });
+    $('.reject').on('click',function () {
+        var slug = $(this).attr('id');
+        $.ajax({'url':'/client/accept_reject/',
+                'data':{'flag':'reject','slug':slug},
+                success:function (data) {
+                    console.log(data)
+                    $('#first').attr('hidden', false)
+                    $('#second').attr('hidden', true)
+                }})
+
+    });
+})
+
+</script>
+
+{% endblock %}
+

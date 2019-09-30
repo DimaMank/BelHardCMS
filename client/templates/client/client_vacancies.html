@@ -1,0 +1,15 @@
+{% extends 'client/client_main_page.html' %}
+
+{% block title %}
+    Vacancies for resume
+{% endblock%}
+
+{% block content %}
+     <h1 class="mb-5"> Vacancies: </h1>
+
+    {% for vacancy in vacancies %}
+
+         {% include 'client/includes/vacancy_template.html' %}
+
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'client/client_main_page.html' %}
+
+{% block title %}
+    Rejected vacancies
+{% endblock%}
+
+{% block content %}
+     <h1 class="mb-5"> Rejected vacancies: </h1>
+
+    {% for vacancy in resume.vacancies_reject.all %}
+
+         {% include 'client/includes/vacancy_template.html' %}
+
+    {% endfor %}
+
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group mr-2" role="group" aria-label="First group">
+    <a href="{{ resume.get_absolute_url }}" class="btn btn-secondary">Назад</a>
+  </div>
+  <!--<div class="btn-group mr-2" role="group" aria-label="Second group">
+    <button type="button" id="{ vacancy.slug }}" class="btn btn-success accept">Добавить</button>
+  </div>
+  <div class="btn-group" role="group" aria-label="Third group">
+    <button type="button" id="{ vacancy.slug }}" class="btn btn-danger reject">Отклонить</button>
+  </div>-->
+</div>
+{% endblock %}

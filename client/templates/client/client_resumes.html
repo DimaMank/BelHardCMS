@@ -1,0 +1,24 @@
+{% extends 'client/client_main_page.html' %}
+
+{% block title %}
+    Resumes
+{% endblock%}
+
+{% block content %}
+     <h1 class="mb-5"> Resumes: </h1>
+
+    {% for resume in resumes %}
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <b>{{ resume.id }}</b>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ resume.state }}</h5>
+                <a href="{{ resume.get_absolute_url }}" class="btn btn-secondary">Подробнее</a>
+            </div>
+
+        </div>
+
+    {% endfor %}
+{% endblock %}

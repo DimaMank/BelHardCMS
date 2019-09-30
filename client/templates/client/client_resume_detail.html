@@ -1,0 +1,30 @@
+{% extends 'client/client_main_page.html' %}
+
+{% block title %}
+    {{resume.state}}
+{% endblock %}
+
+{% block content %}
+    <h1 class="mt-5">
+        {{ resume.state }}
+    </h1>
+
+    {% for vacancy in resume.vacancies_in_waiting.all %}
+
+        {% include 'client/includes/vacancy_template.html' %}
+
+    {% endfor %}
+
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group mr-2" role="group" aria-label="First group">
+    <a href="{%  url 'resume_list_url' %}" class="btn btn-secondary">Назад</a>
+  </div>
+ <div class="btn-group mr-2" role="group" aria-label="Second group">
+    <a href="{{ resume.get_accept_url }}"  class="btn btn-success">Принятые</a>
+  </div>
+  <div class="btn-group" role="group" aria-label="Third group">
+    <a  href="{{ resume.get_reject_url }}" class="btn btn-danger">Отклоненные</a>
+  </div>
+</div>
+
+{% endblock %}

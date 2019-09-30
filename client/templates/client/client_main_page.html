@@ -20,6 +20,9 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
     {% load staticfiles %}
     <title>{% block title %}Client{% endblock %} - HR-System</title>
 </head>
@@ -29,7 +32,7 @@
     <nav class="nav fixed-top" style="background-color: #344955">
         <a class="nav-link text-white" href="/">HR-System</a>
         <a class="nav-link text-white" href="#">Задачи</a>
-        <a class="nav-link text-white" href="#">Предложение</a>
+        <a class="nav-link text-white" href="{% url 'resume_list_url' %}">Предложение</a>
         <a class="nav-link text-white" href="#">Собеседования</a>
         <a class="nav-link text-white" href="#">Связаться с КЦ</a>
         <a class="nav-link text-white" href="{% url 'client_profile' %}">
