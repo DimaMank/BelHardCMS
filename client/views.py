@@ -566,6 +566,7 @@ def vacancy_detail(request, slug):
 def resumes_list(request):
 
     resumes = Resume.objects.all()
+
     return render(request, 'client/client_resumes.html', context={'resumes': resumes})
 
 

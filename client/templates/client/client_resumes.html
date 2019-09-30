@@ -11,7 +11,12 @@
 
         <div class="card mb-4">
             <div class="card-header">
-                <b>{{ resume.id }}</b>
+                <b>
+
+                 Всего вакансий по резюме: {{ resume.vacancies_in_waiting.count }} + {{ resume.vacancies_accept.count }} + {{ resume.vacancies_reject.count }}    |
+                    Принято: {{ resume.vacancies_accept.count }}    |    Отктонено: {{ resume.vacancies_reject.count }}
+
+                </b>
             </div>
             <div class="card-body">
                 <h5 class="card-title">{{ resume.state }}</h5>
@@ -21,4 +26,6 @@
         </div>
 
     {% endfor %}
+
+
 {% endblock %}
