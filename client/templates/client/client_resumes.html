@@ -11,11 +11,18 @@
 
         <div class="card mb-4">
             <div class="card-header">
+                <b id="addition"> </b>
+                    <script>
+                        var x = {{ resume.vacancies_in_waiting.count }};
+                        var y = {{ resume.vacancies_accept.count }};
+                        var z = {{ resume.vacancies_reject.count }};
+                        var s = x + y + z;
+                        document.getElementById("addition").innerHTML = s;
+                    </script>
+
                 <b>
-
-                 Всего вакансий по резюме: {{ resume.vacancies_in_waiting.count }} + {{ resume.vacancies_accept.count }} + {{ resume.vacancies_reject.count }}    |
+                    Всего вакансий по резюме: {{ resume.vacancies_in_waiting.count }} + {{ resume.vacancies_accept.count }} + {{ resume.vacancies_reject.count }}    |
                     Принято: {{ resume.vacancies_accept.count }}    |    Отктонено: {{ resume.vacancies_reject.count }}
-
                 </b>
             </div>
             <div class="card-body">
