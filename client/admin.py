@@ -39,7 +39,15 @@ class ResumeAdmin(admin.ModelAdmin):
         'state', 'slug',
     )
 
+## Test settings for Poland
+class SettingsNotificationAdmin(admin.ModelAdmin):
 
+    list_display = ('tumbler_on_off', )
+    list_display_links = ('tumbler_on_off', )
+    search_fields = ('tumbler_on_off', )
+
+
+admin.site.register(SettingsNotification, SettingsNotificationAdmin)
 admin.site.register(Vacancy, VacancyAdmin)
 admin.site.register(Resume, ResumeAdmin)
 

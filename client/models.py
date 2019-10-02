@@ -324,6 +324,7 @@ class Resume(models.Model): ##Test teble
     vacancies_in_waiting = models.ManyToManyField('Vacancy', blank=True, related_name='in_waiting_for_resume')
     vacancies_accept = models.ManyToManyField('Vacancy', blank=True, related_name='accept_for_resume')
     vacancies_reject = models.ManyToManyField('Vacancy', blank=True, related_name='reject_for_resume')
+    notification = models.ManyToManyField('Vacancy', blank=True, related_name='notifications_for_resume')
 
     def __str__(self):
         return '{}'.format(self.state)
@@ -336,3 +337,7 @@ class Resume(models.Model): ##Test teble
 
     def get_reject_url(self):
         return reverse('rejected_vacancies_url', kwargs={'slug': self.slug})
+
+
+class SettingsNotification(models.Model): ## Test table
+    tumbler_on_off = models.CharField(max_length=5)

@@ -21,6 +21,12 @@ from django.contrib import auth
 def client_main_page(request):
     response = csrf(request)
     response['client_img'] = load_client_img(request.user)
+    #Poland
+    resumes = Resume.objects.all()
+    notification = 0
+    for resume in resumes:
+        notification += resume.notification.count()
+    response['notification'] = notification
 
     return render(request=request, template_name='client/client_main_page.html', context=response)
 
@@ -566,8 +572,11 @@ def vacancy_detail(request, slug):
 def resumes_list(request):
 
     resumes = Resume.objects.all()
+    notification = 0
+    for resume in resumes:
+        notification += resume.notification.count()
 
-    return render(request, 'client/client_resumes.html', context={'resumes': resumes})
+    return render(request, 'client/client_resumes.html', context={'resumes': resumes, 'notification': notification})
 
 
 def resume_detail(request, slug):
