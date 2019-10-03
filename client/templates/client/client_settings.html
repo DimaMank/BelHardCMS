@@ -5,10 +5,49 @@
 {% endblock%}
 
 {% block content %}
+    <p>Управление уведомлениями</p>
     <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary">Выключить</button>
-        <button type="button" class="btn btn-secondary">Включено</button>
+
+        <button type="button" class="btn btn-secondary" id="off" disabled>Выключить</button>
+        <button type="button" class="btn btn-secondary" id="on" disabled>Включить</button>
     </div>
+
+
+
+<script>
+$('document').ready(function () {
+    var on_off = {{ status }}
+        console.log(on_off);
+    if (on_off){$('#off').attr('disabled', false)}
+    else {$('#on').attr('disabled', false)}
+
+
+    /*actions for buttons*/
+    $('.accept').on('click',function () {
+        var slug = $(this).attr('id');
+        $.ajax({'url':'/client/accept_reject/',
+                'data':{'flag':'accept',"slug":slug},
+                success:function (data) {
+                    console.log(data);
+                    $('#first').attr('hidden', true)
+                    $('#second').attr('hidden', false)
+                }})
+
+    });
+    $('.reject').on('click',function () {
+        var slug = $(this).attr('id');
+        $.ajax({'url':'/client/accept_reject/',
+                'data':{'flag':'reject','slug':slug},
+                success:function (data) {
+                    console.log(data)
+                    $('#first').attr('hidden', false)
+                    $('#second').attr('hidden', true)
+                }})
+
+    });
+})
+
+</script>
 {% endblock %}
 
 

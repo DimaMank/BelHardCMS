@@ -572,11 +572,11 @@ def vacancy_detail(request, slug):
 def resumes_list(request):
 
     resumes = Resume.objects.all()
-    notification = 0
-    for resume in resumes:
-        notification += resume.notification.count()
+    #notification = 0
+    #for resume in resumes:
+        #notification += resume.notification.count()
 
-    return render(request, 'client/client_resumes.html', context={'resumes': resumes, 'notification': notification})
+    return render(request, 'client/client_resumes.html', context={'resumes': resumes})
 
 
 def resume_detail(request, slug):
@@ -634,5 +634,16 @@ def accept_reject(request):#
         r.vacancies_accept.remove(v)
         r.save()
         return HttpResponse('reject_server')
+
+
+def settings_on_off(request):
+    status = 1 if SettingsNotification.objects.get() == 'on' else 0
+    print('status = ', status)
+    return render(request, 'client/client_settings.html', context={'status': status})
+
+
+def on_off(request):
+    pass
+
 
 # end Poland's views
