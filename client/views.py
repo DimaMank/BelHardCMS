@@ -27,6 +27,7 @@ def client_main_page(request):
     for resume in resumes:
         notification += resume.notification.count()
     response['notification'] = notification
+    response['status'] = 1 if SettingsNotification.objects.get().tumbler_on_off == 'on' else 0
 
     return render(request=request, template_name='client/client_main_page.html', context=response)
 
@@ -637,13 +638,17 @@ def accept_reject(request):#
 
 
 def settings_on_off(request):
-    status = 1 if SettingsNotification.objects.get() == 'on' else 0
+    status = 1 if SettingsNotification.objects.get().tumbler_on_off == 'on' else 0
     print('status = ', status)
     return render(request, 'client/client_settings.html', context={'status': status})
 
 
 def on_off(request):
-    pass
+    status = SettingsNotification.objects.get()
+    status.tumbler_on_off = request.GET['status']
+    print(status.tumbler_on_off)
+    status.save()
+    return HttpResponse(status.tumbler_on_off)
 
 
 # end Poland's views

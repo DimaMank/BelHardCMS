@@ -51,18 +51,21 @@
 <!-- There is KOSTYL from Poland))-->
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+{% if status %}
 <div class="p-sm-3 pt-sm-5" >
 
     {% if notification %}
+        <a href="{%  url 'resume_list_url' %}">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
            У Вас <strong> {{ notification }}</strong> новое предложение по трудоустройству.
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        </a>
     {% endif %}
 </div>
+{% endif %}
 
 <div class="p-sm-3 pt-sm-5">
     <a href="#" class="btn btn-dark btn-lg" style="background-color: #344955" type="button" >Помощь</a>

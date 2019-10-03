@@ -30,7 +30,7 @@ urlpatterns = [
     path('resume_detail/<str:slug>/accepted_vacancies/', accepted_vacancies, name='accepted_vacancies_url'),
     path('resume_detail/<str:slug>/rejected_vacancies/', rejected_vacancies, name='rejected_vacancies_url'),
     path('accept_reject/', views.accept_reject),
-    path('settings_on_off', settings_on_off, name='settings_on_off_url'),
+    path('settings_on_off/', settings_on_off, name='settings_on_off_url'),
     path('on_off/', views.on_off),
 
 
