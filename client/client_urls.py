@@ -31,7 +31,8 @@ urlpatterns = [
     path('resume_detail/<str:slug>/rejected_vacancies/', rejected_vacancies, name='rejected_vacancies_url'),
     path('accept_reject/', views.accept_reject),
     path('settings_on_off/', settings_on_off, name='settings_on_off_url'),
-    path('on_off/', views.on_off),
+    path('on_off/', views.on_off),    # on_off settings for notifications
+    path('viewed/', views.viewed),
 
 
 ]

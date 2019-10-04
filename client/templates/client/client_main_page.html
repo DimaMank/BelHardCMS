@@ -32,7 +32,7 @@
     <nav class="nav fixed-top" style="background-color: #344955">
         <a class="nav-link text-white" href="/">HR-System</a>
         <a class="nav-link text-white" href="#">Задачи</a>
-        <a class="nav-link text-white" href="{% url 'resume_list_url' %}">Предложение</a>
+        <a class="nav-link text-white" href="{% url 'resume_list_url' %}" id="clearnotif">Предложение</a>
         <a class="nav-link text-white" href="#">Собеседования</a>
         <a class="nav-link text-white" href="#">Связаться с КЦ</a>
         <a class="nav-link text-white" href="{% url 'client_profile' %}">
@@ -55,9 +55,9 @@
 <div class="p-sm-3 pt-sm-5" >
 
     {% if notification %}
-        <a href="{%  url 'resume_list_url' %}">
+        <a href="{%  url 'resume_list_url' %}" id="clearnotif1">
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-           У Вас <strong> {{ notification }}</strong> новое предложение по трудоустройству.
+           Новых предложений: <strong> {{ notification }}</strong>.
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                <span aria-hidden="true">&times;</span>
           </button>
@@ -73,6 +73,32 @@
     <a href="#" class="btn btn-dark btn-lg" style="background-color: #344955" type="button">Оставить отзыв</a>
 
 </div>
+
+<script>
+$('document').ready(function () {
+
+    /*actions for buttons*/
+    $('#clearnotif').on('click',function () {
+        $.ajax({'url':'/client/viewed/',
+                'data':{'action': 'clear'},
+                success:function (data) {
+                    console.log(data);
+                }})
+
+    });
+
+    $('#clearnotif1').on('click',function () {
+        $.ajax({'url':'/client/viewed/',
+                'data':{'action': 'clear'},
+                success:function (data) {
+                    console.log(data);
+                }})
+
+    });
+
+})
+
+</script>
 
 </body>
 </html>

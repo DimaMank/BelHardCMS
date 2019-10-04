@@ -573,9 +573,6 @@ def vacancy_detail(request, slug):
 def resumes_list(request):
 
     resumes = Resume.objects.all()
-    #notification = 0
-    #for resume in resumes:
-        #notification += resume.notification.count()
 
     return render(request, 'client/client_resumes.html', context={'resumes': resumes})
 
@@ -649,6 +646,16 @@ def on_off(request):
     print(status.tumbler_on_off)
     status.save()
     return HttpResponse(status.tumbler_on_off)
+
+
+def viewed(request):
+    if request.GET['action'] == 'clear':
+        resumes = Resume.objects.all()
+        for resume in resumes:
+            r = resume
+            r.notification.clear()
+        return HttpResponse('cleared')
+
 
 
 # end Poland's views
